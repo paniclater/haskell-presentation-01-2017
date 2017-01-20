@@ -4,8 +4,9 @@ These are the notes for the January 2017 Utah Haskell Meetup. The goal was to co
 
 Resources:
 
-[https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json](json decoding and encoding lesson)
-[http://eloquentjavascript.net/05_higher_order.html](eloquent javascript chapter 5)
+- [json decoding and encoding lesson](https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json)
+
+- [eloquent javascript chapter 5](http://eloquentjavascript.net/05_higher_order.html)
 
 
 1. Create a project!
