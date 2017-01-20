@@ -1,5 +1,13 @@
 ## haskell vs javascript
 
+These are the notes for the January 2017 Utah Haskell Meetup. The goal was to compare and contrast haskell to javascript by writing the examples and exercises from the Higher Order Functions chapter of Eloquent Javascript to solutions in Haskell. We made it about 3/4 of the way through, so some fun challenges still remain to work through, including the shared dna calculation exercise.
+
+Resources:
+
+[https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json](json decoding and encoding lesson)
+[http://eloquentjavascript.net/05_higher_order.html](eloquent javascript chapter 5)
+
+
 1. Create a project!
   1. Make sure stack is installed: `curl -sSL https://get.haskellstack.org/ | sh`
   1. Create new project `stack new helloworld new-template`
