@@ -1,0 +1,69 @@
+{-# LANGUAGE DeriveGeneric #-}
+
+module Lib () where
+import Prelude as P
+import Data.Aeson (eitherDecode, FromJSON)
+import GHC.Generics
+import Data.ByteString.Lazy as L
+
+data Person
+  = Person { name   :: String
+           , sex    :: String
+           , born   :: Int
+           , died   :: Int
+           , father :: String
+           , mother :: String
+            } deriving (Show, Generic)
+
+
+instance FromJSON Person
+
+r = Person "ryan" "f" 1981 2007 "dad" "mom"
+d = Person "diana" "f" 1985 2016 "dad" "mom"
+
+jsonFile :: FilePath
+jsonFile = "ancestry.json" hello
+
+
+getJSON :: IO L.ByteString
+getJSON = L.readFile jsonFile
+
+bornAfter :: Int -> Person -> Bool
+bornAfter n p = born p > n
+
+ancienter :: Person -> Person -> Person
+ancienter a p = if born a < born p then a else p
+
+recenter :: Person -> Person -> Person
+recenter a p = if died a > died p then a else p
+
+compareBirthDeath :: (Person -> Int) -> Person -> Person -> Person
+compareBirthDeath accessor a p = if accessor a > accessor p then a else p
+
+average :: [Int] -> Float
+average xs =
+  let x = fromIntegral $ P.foldl (+) 0 xs
+      y = fromIntegral $ P.length xs
+  in x / y
+
+age :: Person -> Int
+age p = died p - born p
+
+male :: Person -> Bool
+male p = "m" == sex p
+
+female :: Person -> Bool
+female p = "f" == sex p
+
+byName :: String -> [Person] -> Person
+byName n ps = P.head $ P.filter (\p -> n == name p) ps
+
+ancestors :: IO ()
+ancestors = do
+  d <- (eitherDecode <$> getJSON) :: IO (Either String [Person])
+  case d of
+    Left err -> P.putStrLn $ "error" ++ err
+--    Right as -> print as
+    Right as -> print $ average $ P.map age $ P.filter male as
+--    Right as -> print $ P.map name $ P.filter (bornAfter 1850) as
+--    Right as -> print $ P.foldl1 ancienter as
